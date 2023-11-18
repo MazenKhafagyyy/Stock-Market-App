@@ -67,8 +67,9 @@ expected output:
 ]
 """
 
-def financial_report(tick: str):
-    pass
+def financial_report(tick: str, freq: str = 'annual'):
+    result_dict = finnhub_client.financials_reported(symbol=tick, freq=freq)
+    return result_dict
 
 def predicitoin(tick: str):
     pass
