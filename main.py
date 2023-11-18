@@ -7,7 +7,8 @@ api_key = 'ckuqblpr01qmtr8lgnu0ckuqblpr01qmtr8lgnug'
 finnhub_client = finnhub.Client(api_key=api_key)
 
 def company_data(tick: str):
-    pass
+    profile_data = finnhub_client.company_profile2(symbol=tick)
+    return profile_data
 
 """
 expected output:
