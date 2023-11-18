@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import finnhub
 
 app = Flask(__name__)
@@ -7,7 +7,8 @@ api_key = 'ckuqblpr01qmtr8lgnu0ckuqblpr01qmtr8lgnug'
 finnhub_client = finnhub.Client(api_key=api_key)
 
 def company_data(tick: str):
-    pass
+    profile_data = finnhub_client.company_profile2(symbol=tick)
+    return profile_data
 
 """
 expected output:
@@ -78,7 +79,8 @@ def home():
 
 @app.route('/company-data', methods=["POST"])
 def receive_data():
-    return render_template("result.html")
+    stock_name = request.form['stock_name']
+    return render_template("result.html", stock_name=stock_name)
 
 if __name__ == '__main__':
     app.run(debug=True)
