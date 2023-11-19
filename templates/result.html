@@ -3,83 +3,194 @@
 <head>
     <style>
         /* core.css */
+                /* core.css */
 
         /* General styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #9cb2e3;
-            color: black;
+            background-color: #121212; /* Dark background for dark mode */
+            color: #ffffff; /* White text for dark mode */
         }
-        
+
+        /* Company profile wrapper */
+        .company-profile {
+            background-color: #1e1e1e; /* Dark background for the wrapper */
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+            max-width: 800px; /* Adjust as needed */
+        }
+
+        .company-profile h2 {
+            color: #dddddd; /* Blue heading for company name */
+            margin-bottom: 10px;
+        }
+
+        .company-profile p {
+            line-height: 1.6;
+            color: #dddddd; /* Light grey for readable paragraph text */
+            margin-bottom: 10px; /* Spacing between paragraphs */
+        }
+
+        .company-profile img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 5px; /* Optional: round corners for the image */
+            margin-bottom: 10px;
+        }
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Dark background for dark mode */
+            color: #ffffff; /* White text for dark mode */
+        }
+
         h1 {
             color: #007bff;
         }
-        
+
         p {
             line-height: 1.6;
+            color: #dddddd; /* Lighter text color for readability */
         }
-        
+
         /* Styling for stock information */
         .stock-info {
             margin-bottom: 20px;
             padding: 10px;
-            background-color: #fff;
+            background-color: #1e1e1e; /* Dark background for elements */
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1); /* Light shadow for depth */
+            color: #ffffff; /* White text for dark mode */
         }
-        
+
         .stock-info img {
             max-width: 100px;
             height: auto;
             margin-bottom: 10px;
         }
-        
+
         /* Result div */
         #result {
-            background-color: #e9ecef;
+            background-color: #2a2a2a; /* Slightly different dark shade for separation */
             padding: 10px;
             margin-top: 20px;
             border-radius: 5px;
+            color: #ffffff; /* White text for dark mode */
         }
-        
+
         /* Company data styling */
         .company-data {
             margin-top: 20px;
             padding: 10px;
-            background-color: #fff;
+            background-color: #1e1e1e; /* Consistent element background */
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1); /* Light shadow for depth */
+            color: #ffffff; /* White text for dark mode */
         }
+
+        canvas {
+            background-color: #333; /* Dark background for canvas */
+        }
+
+        /* Chart color adjustments */
+        .chartjs-render-monitor {
+            background-color: #333; /* Dark background for charts */
+        }
+
+        /* Chart container styling */
+        .chart-container {
+            display: flex; /* Use flexbox layout */
+            align-items: center; /* Vertically center the items in the container */
+            justify-content: center; /* Horizontally center the items */
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column; /* Stack the h2 and p vertically */
+        }
+        .text-container h2 {
+            color: #ffffff; /* White text color */
+            margin: 0 0 10px 0; /* Spacing between h2 and p */
+        }
+
+        .text-container p {
+            color: #dddddd; /* Slightly dimmer white for the paragraph */
+            margin: 0; /* Reset margin for the paragraph */
+        }
+
+        /* Chart canvas styling */
+        #myChart {
+            width: 100%; /* Full width of the container */
+            max-width: 600px; /* Maximum width, keeping the chart responsive */
+            background-color: #333; /* Slightly lighter background for the chart area */
+            border-radius: 5px; /* Rounded corners for the chart canvas */
+        }
+        .chart-container img {
+            max-width: 50%; /* Adjust the width as necessary */
+            height: auto;
+            margin-right: 20px; /* Add some space between the image and the paragraph */
+            border-radius: 5px;
+        }
+        .chart-container p {
+            color: #ffffff; /* White text color */
+            flex: 1; /* Takes the remaining space */
+            margin: 0; /* Reset margin for the paragraph */
+        }
+        .chart-js {
+            padding: 20px;
+            background-color: #fff; /* Light background for the chart to stand out in dark mode */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+            max-width: 90%; /* Make sure it doesn't overflow the width of its parent */
+        }
+
+        /* Responsive canvas */
+        #myChart {
+            width: 100%;
+            max-width: 100%; /* Full width of the container */
+            height: auto; /* Maintain aspect ratio */
+        }
+
     </style>
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://pyscript.net/releases/2023.11.1/core.css" />
-    <script type="module" src="https://pyscript.net/releases/2023.11.1/core.js"></script>
+    <!-- Removed PyScript link as it's not used in the provided HTML -->
 </head>
 <body>
-    <p>Stock Name: {{ stock_name }}</p>
-    <!--COMPANY DATA-->
-    <img src= "{{ company_data['logo'] }}" alt="Company Logo">
-    <p>Country: {{ company_data['country'] }}</p>
-    <p>Currency: {{ company_data['currency'] }}</p>
-    <p>Exchange: {{ company_data['exchange'] }}</p>
-    <p>IPO: {{ company_data['ipo'] }}</p>
-    <p>Market Capitalization: {{ company_data['marketCapitalization'] }}</p>
-    <p>Name: {{ company_data['name'] }}</p>
-    <p>Phone: {{ company_data['phone'] }}</p>
-    <p>Share Outstanding: {{ company_data['shareOutstanding'] }}</p>
-    <p>Ticker: {{ company_data['ticker'] }}</p>
-    <p>URL: {{ company_data['weburl'] }}</p>
-
+    <h1>Company Stock Information</h1> <!-- Added heading for context -->
+    <div class="company-profile">
+        <h2>{{ company_data['name'] }}</h2> <!-- Company name as a heading -->
+        <img src= "{{ company_data['logo'] }}" alt="Company Logo">
+        <p>Country: {{ company_data['country'] }}</p>
+        <p>Currency: {{ company_data['currency'] }}</p>
+        <p>Exchange: {{ company_data['exchange'] }}</p>
+        <p>IPO: {{ company_data['ipo'] }}</p>
+        <p>Market Capitalization: {{ company_data['marketCapitalization'] }}</p>
+        <p>Phone: {{ company_data['phone'] }}</p>
+        <p>Share Outstanding: {{ company_data['shareOutstanding'] }}</p>
+        <p>Ticker: {{ company_data['ticker'] }}</p>
+        <p>Web URL: <a href="{{ company_data['weburl'] }}" target="_blank">{{ company_data['weburl'] }}</a></p>
+        <!-- TradingView Widget END -->
+    </div>
+    <div class="chart-container">
+     <h2>this is title</h2>
+     <p>this is paragraph</p>
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
     <script type="text/javascript">
-        // var xValues = ["Italy", "France", "Spain", "USA"];
-        // var yValues = [55, 49, 44, 24, 66];
-        // var y2Values = [55, 49, 22, 30, 80];
-        
+        /* Global chart styling with Chart.js options */
+
         var xValues = {{ x_values|tojson }};
         var y1Values = {{ y1_values|tojson }};
         var y2Values = {{ y2_values|tojson }};
@@ -91,33 +202,36 @@
             datasets: [
             {
                 label: "Actual",
-                backgroundColor: 'rgba(235, 0, 235, 0.5)',
+                backgroundColor: '#42f02b',
                 data: y1Values
             },
             {
                 label: "Estimate",
-                backgroundColor: 'rgba(235, 235, 0.5)',
+                backgroundColor: '#007bff',
                 data: y2Values
             }]
         },
         options: {
+            responsive: true,
             legend: {display: false},
+            aspectRatio: 3,
             title: {
             display: true,
             text: "World Wine Production 2018"
             }
         }
         });
-</script>
-<div>
-  <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Red dot" />
-</div>
-<div>
-  <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="suprise earn " />
-</div>
-
-
+    </script>
+    </div>
+    <div class="chart-container">
+        <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Linear Regression Graph" />
+        <div class="text-container">
+            <h2>Linear regression prediction</h2>
+            <p>This is how you can predict the stock price!</p>
+        </div>
+    </div>
+    <div>
+        <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="Surprise Earnings Image" />
+    </div>
 </body>
-
 </html>
-
