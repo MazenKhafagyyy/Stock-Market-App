@@ -28,8 +28,9 @@ expected output:
 }
 """
 
-def suprise_earn(tick: str):
-    pass
+def suprise_earn(tick: str, limit):
+    suprise_earns = finnhub_client.company_earnings('TSLA', limit=limit)
+    return suprise_earns
 
 """
 expected output:
