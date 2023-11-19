@@ -186,6 +186,31 @@ def get_xy_values(tick):
     return period_values, actual_earn, estimate_earn
 
 
+def get_scatter_points(stock_name):
+    # Current datetime
+    current_datetime = datetime.now()
+
+    # Datetime one year ago
+    one_year_ago = current_datetime - timedelta(days=365)
+
+    # Convert both to Unix timestamps
+    current_timestamp = int(current_datetime.timestamp())
+    one_year_ago_timestamp = int(one_year_ago.timestamp())
+
+    finnhub_client = finnhub.Client(api_key="ckuqblpr01qmtr8lgnu0ckuqblpr01qmtr8lgnug")
+
+    data = finnhub_client.stock_candles(stock_name, 'D', one_year_ago_timestamp, current_timestamp)
+
+    stock_prices = data['c']
+
+    # Create a corresponding time series (assuming each price corresponds to a new day)
+    days = list(range(len(stock_prices)))
+
+    list_of_dicts = [{ 'x': day, 'y': price } for day, price in zip(days, stock_prices)]
+
+    return list_of_dicts
+
+
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -198,6 +223,7 @@ def receive_data():
     linear_reg_graph = graph_linear_reg(stock_name)
     suprise_earn_img = graph_suprise_earn(stock_name)
     x_values, y1_values, y2_values = get_xy_values(stock_name)
+    points = get_scatter_points(stock_name)
     return render_template(
         "result.html",
         company_data=company_data,
@@ -207,7 +233,8 @@ def receive_data():
         suprise_earn_img=suprise_earn_img,
         x_values = x_values,
         y1_values = y1_values,
-        y2_values = y2_values
+        y2_values = y2_values,
+        points = points
     )
 
 if __name__ == '__main__':
