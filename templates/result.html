@@ -87,6 +87,45 @@
         z = x + y
         document.getElementById("result").innerText = f"The value of z is: {z}"
     </py-script>
+
+    <p>{{ x_values }}</p>
+    <p>{{ y1_values }}</p>
+    <p>{{ y2_values }}</p>
+
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    <script type="text/javascript">
+        // var xValues = ["Italy", "France", "Spain", "USA"];
+        // var yValues = [55, 49, 44, 24, 66];
+        // var y2Values = [55, 49, 22, 30, 80];
+        
+        var xValues = {{ x_values|tojson }};
+        var y1Values = {{ y1_values|tojson }};
+        var y2Values = {{ y2_values|tojson }};
+
+        new Chart("myChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [
+            {
+                backgroundColor: 'rgba(235, 0, 235, 0.5)',
+                data: y1Values
+            },
+            {
+                data: y2Values
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+            display: true,
+            text: "World Wine Production 2018"
+            }
+        }
+        });
+</script>
+    </script>
+
 </body>
 
 </html>

@@ -169,6 +169,23 @@ def graph_suprise_earn(tick):
     return my_base64_jpgData
 
 
+def get_xy_values(tick):
+    data = (finnhub_client.company_earnings(tick, limit=5))
+
+    # Create empty lists to store the 'period', 'actual', and 'estimate' values
+    period_values = []
+    actual_earn = []
+    estimate_earn = []
+
+    # Iterate through each dictionary in the list and extract the values
+    for record in data:
+        period_values.append(record['period'])
+        actual_earn.append(record['actual'])
+        estimate_earn.append(record['estimate'])
+
+    return period_values, actual_earn, estimate_earn
+
+
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -180,13 +197,17 @@ def receive_data():
     company_data = company_datas(stock_name)
     linear_reg_graph = graph_linear_reg(stock_name)
     suprise_earn_img = graph_suprise_earn(stock_name)
+    x_values, y1_values, y2_values = get_xy_values(stock_name)
     return render_template(
         "result.html",
         company_data=company_data,
         stock_name=stock_name,
         stock_prices=stock_prices,
         linear_reg_graph=linear_reg_graph,
-        suprise_earn_img=suprise_earn_img
+        suprise_earn_img=suprise_earn_img,
+        x_values = x_values,
+        y1_values = y1_values,
+        y2_values = y2_values
     )
 
 if __name__ == '__main__':
