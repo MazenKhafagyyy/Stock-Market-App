@@ -130,7 +130,10 @@ def graph_linear_reg(tick):
     return my_base64_jpgData
 
 def graph_suprise_earn(tick):
-    data = (finnhub_client.company_earnings(tick, limit=5))
+    data = finnhub_client.company_earnings(tick, limit=5)
+
+    # Sort the data by period here, assuming 'period' is a date string like '2022-Q1'
+    data.sort(key=lambda x: datetime.strptime(x['period'], '%Y-%m-%d'))
 
     # Create empty lists to store the 'period', 'actual', and 'estimate' values
     period_values = []
@@ -168,7 +171,6 @@ def graph_suprise_earn(tick):
 
     return my_base64_jpgData
 
-
 def get_xy_values(tick):
     data = (finnhub_client.company_earnings(tick, limit=5))
 
@@ -185,6 +187,31 @@ def get_xy_values(tick):
 
     return period_values, actual_earn, estimate_earn
 
+def top_3news(tick):
+    # Get the current datetime
+    current_datetime = datetime.now()
+
+    # Datetime one year ago
+    one_year_ago = current_datetime - timedelta(days=365)
+
+    # Format the dates for the API call
+    from_date = one_year_ago.strftime("%Y-%m-%d")
+    to_date = current_datetime.strftime("%Y-%m-%d")
+
+    # Get company news for Apple (AAPL) from one year ago to today
+    news = finnhub_client.company_news(tick, _from=from_date, to=to_date)
+    news = news[:3]
+
+    for i in range(0, len(news)):
+        del news[i]["category"]
+        del news[i]["datetime"]
+        del news[i]["id"]
+        del news[i]["related"]
+        del news[i]["source"]
+        del news[i]["image"]
+
+    return news
+
 
 @app.route('/')
 def home():
@@ -198,6 +225,9 @@ def receive_data():
     linear_reg_graph = graph_linear_reg(stock_name)
     suprise_earn_img = graph_suprise_earn(stock_name)
     x_values, y1_values, y2_values = get_xy_values(stock_name)
+    news = top_3news(stock_name)
+    print(news)
+    print(news[0])
     return render_template(
         "result.html",
         company_data=company_data,
@@ -207,7 +237,8 @@ def receive_data():
         suprise_earn_img=suprise_earn_img,
         x_values = x_values,
         y1_values = y1_values,
-        y2_values = y2_values
+        y2_values = y2_values,
+        news=news
     )
 
 if __name__ == '__main__':

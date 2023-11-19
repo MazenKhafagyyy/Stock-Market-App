@@ -51,7 +51,7 @@
         }
 
         h1 {
-            color: #007bff;
+            color: #dddddd;
         }
 
         p {
@@ -161,6 +161,45 @@
             max-width: 100%; /* Full width of the container */
             height: auto; /* Maintain aspect ratio */
         }
+        /* Style for the main news container */
+        .news-container {
+            width: 100%;
+            max-width: 600px; /* Adjust the max-width as needed */
+            margin: auto;
+            padding: 20px;
+        }
+        .news-sub {
+            border: 1px solid #525354; /* For illustration */
+            margin-bottom: 20px; /* Spacing between news articles */
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .news-sub img {
+            width: 100%; /* Make image responsive */
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .news-sub h2 {
+            font-size: 1.5em; /* Adjust headline size as needed */
+            margin-bottom: 10px;
+        }
+        .news-sub p {
+            font-size: 1em; /* Adjust summary text size as needed */
+        }
+        .paraghraph {
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 200px;
+            margin-bottom: 200px;
+            text-align: center;
+        }
+        .paraghraph p{
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+
+
 
     </style>
     <meta charset="UTF-8">
@@ -184,54 +223,113 @@
         <p>Web URL: <a href="{{ company_data['weburl'] }}" target="_blank">{{ company_data['weburl'] }}</a></p>
         <!-- TradingView Widget END -->
     </div>
-    <div class="chart-container">
-     <h2>this is title</h2>
-     <p>this is paragraph</p>
-    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-    <script type="text/javascript">
-        /* Global chart styling with Chart.js options */
+<!--    <div class="chart-container">-->
+<!--     <h2>this is title</h2>-->
+<!--     <p>this is paragraph</p>-->
+<!--    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>-->
+<!--    <script type="text/javascript">-->
+<!--        /* Global chart styling with Chart.js options */-->
 
-        var xValues = {{ x_values|tojson }};
-        var y1Values = {{ y1_values|tojson }};
-        var y2Values = {{ y2_values|tojson }};
+<!--        var xValues = {{ x_values|tojson }};-->
+<!--        var y1Values = {{ y1_values|tojson }};-->
+<!--        var y2Values = {{ y2_values|tojson }};-->
 
-        new Chart("myChart", {
-        type: "bar",
-        data: {
-            labels: xValues,
-            datasets: [
-            {
-                label: "Actual",
-                backgroundColor: '#42f02b',
-                data: y1Values
-            },
-            {
-                label: "Estimate",
-                backgroundColor: '#007bff',
-                data: y2Values
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {display: false},
-            aspectRatio: 3,
-            title: {
-            display: true,
-            text: "World Wine Production 2018"
-            }
-        }
-        });
-    </script>
-    </div>
+<!--        new Chart("myChart", {-->
+<!--        type: "bar",-->
+<!--        data: {-->
+<!--            labels: xValues,-->
+<!--            datasets: [-->
+<!--            {-->
+<!--                label: "Actual",-->
+<!--                backgroundColor: '#42f02b',-->
+<!--                data: y1Values-->
+<!--            },-->
+<!--            {-->
+<!--                label: "Estimate",-->
+<!--                backgroundColor: '#007bff',-->
+<!--                data: y2Values-->
+<!--            }]-->
+<!--        },-->
+<!--        options: {-->
+<!--            responsive: true,-->
+<!--            legend: {display: false},-->
+<!--            aspectRatio: 3,-->
+<!--            title: {-->
+<!--            display: true,-->
+<!--            text: "World Wine Production 2018"-->
+<!--            }-->
+<!--        }-->
+<!--        });-->
+<!--    </script>-->
+<!--    </div>-->
     <div class="chart-container">
         <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Linear Regression Graph" />
         <div class="text-container">
-            <h2>Linear regression prediction</h2>
-            <p>This is how you can predict the stock price!</p>
+            <h2>Linear regression prediction 🧙‍♂️</h2>
+            <p>
+                📊 In the world of graphs, a linear regression is like having a financial advisor showing the
+                relationship between two investments. The X-axis is your cost, and the Y-axis is your profit.
+                💰 Each dot is like a snapshot of what you spend versus what you earn. 📈 The line of best fit cuts
+                through the noise and shows the trend: if it's climbing up, more spending equals more moolah. If it's
+                heading down, it's time to rethink your strategy because costs are not translating into gains. 📉 Remember,
+                this line is your guide through the ups and downs of investing,
+                giving you the big picture in a glance! 🧐💹
+            </p>
+        </div>
+    </div>
+    <div class="chart-container">
+        <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="Surprise Earnings Image" />
+        <div class="text-container">
+            <h2>earnings 🆚 estimated earnings</h2>
+            <p>
+                📊 This bar chart is like a visual scoreboard showing how
+                {{ company_data['name'] }} scored in the earnings game 🏆 over the last
+                four quarters. You've got two teammates showing up for each quarter –
+                one wearing a blue jersey for the actual earnings and one in orange for
+                the estimated earnings. 🤓 Check out the height of these bars to see how much
+                {{ company_data['name'] }} brought in – the taller the bar, the bigger the earnings!
+                When blue out-jumps orange, it means {{ company_data['name'] }} really knocked it out
+                of the park and did better than what the number crunchers predicted. 🚀 If they're neck
+                and neck, it's a tie – the estimates were spot on. 🎯 And if blue's looking up at orange,
+                it means the actual earnings didn't quite hit the forecast. So, take a peek and see how {{ company_data['name'] }}
+                has been doing quarter by quarter – it's all about those ups and downs! 📈📉
+            </p>
+        </div>
+    </div>
+    <div class="paraghraph">
+        <h1>
+            So you already learn how to analyze stock market in mathematical and statistical way.
+            Now let's analyze the stock market or company
+            from what's going on, on the news right now 👇
+        </h1>
+    </div>
+    <div class="news-container">
+        <div class="news-sec">
+            <div class="news-sub">
+                <h2><a href="{{ news[0]['url'] }}"> {{ news[0]['headline'] }} </a></h2>
+                <p>{{ news[0]['summary']}}</p>
+            </div>
+            <div class="news-sub">
+                <h2><a href="{{ news[1]['url'] }}"> {{ news[1]['headline'] }} </a></h2>
+                <p>{{ news[1]['summary']}}</p>
+            </div>
+            <div class="news-sub">
+                <h2><a href="{{ news[2]['url'] }}"> {{ news[2]['headline'] }} </a></h2>
+                <p>{{ news[2]['summary']}}</p>
+            </div>
         </div>
     </div>
     <div>
-        <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="Surprise Earnings Image" />
+        <p class="paraghraph">
+            So, when you're trying to figure out how the latest headlines could play with the stock market,
+            think of it like reading tea leaves for your favorite superhero – except your hero is your portfolio,
+            and the leaves are the news! 📰💹 If a company scores a big contract or launches a cool product,
+            it's like a power-up, and their stock might soar. 🚀 But if there's scandalous gossip or a super-villain
+            afoot (think legal troubles or bad earnings), their stock could take a nosedive. 📉 Keep your eyes peeled
+            on how investors might react to the news – if they're feeling confident, you'll see those stocks flex and climb.
+            Just remember, the market's mood can change faster than a chameleon on a disco ball,
+            so always do your homework before making any caped crusades into the world of stocks! 🦸‍♀️📚
+        </p>
     </div>
 </body>
 </html>
