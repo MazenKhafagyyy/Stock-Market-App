@@ -3,13 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #121212; /* Dark background for dark mode */
+            color: #ffffff; /* White text for dark mode */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: #1e1e1e; /* Slightly lighter shade for the form background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255,255,255,0.1); /* Light shadow for depth */
+            width: 300px;
+        }
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #333; /* Darker background for input */
+            border: 1px solid #444; /* Slightly lighter border for visibility */
+            color: #fff; /* White text */
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff; /* Blue color for contrast */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(255,255,255,0.2); /* Light shadow for the button */
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        label {
+            color: #bbb; /* Light grey text for labels */
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <form action="/company-data" method="post">
-        <!-- Additional form fields can be added here if needed -->
-        <label for="stock_name">Stock Name</label>
-        <input type="text" class="form-control" id="stock_name" placeholder="TSLA" name="stock_name">
-        <button type="submit">Test Button</button>
+        <label for="stock_name">Stock Name:</label>
+        <input type="text" class="form-control" id="stock_name" placeholder="Enter stock ticker, e.g., TSLA" name="stock_name">
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
