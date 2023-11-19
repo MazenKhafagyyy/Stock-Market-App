@@ -1,6 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        /* core.css */
+
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #9cb2e3;
+            color: black;
+        }
+        
+        h1 {
+            color: #007bff;
+        }
+        
+        p {
+            line-height: 1.6;
+        }
+        
+        /* Styling for stock information */
+        .stock-info {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stock-info img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        /* Result div */
+        #result {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        /* Company data styling */
+        .company-data {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,7 +64,7 @@
     <p>Stock Name: {{ stock_name }}</p>
     <P>Stock prices: {{ stock_prices }}</P>
     <!--COMPANY DATA-->
-    <img src= {{ company_data['logo'] }} alt="Company Logo">
+    <img src= "{{ company_data['logo'] }}" alt="Company Logo">
     <p>Country: {{ company_data['country'] }}</p>
     <p>Currency: {{ company_data['currency'] }}</p>
     <p>Exchange: {{ company_data['exchange'] }}</p>
