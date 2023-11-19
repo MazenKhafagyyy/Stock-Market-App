@@ -73,7 +73,6 @@
     <p>Share Outstanding: {{ company_data['shareOutstanding'] }}</p>
     <p>Ticker: {{ company_data['ticker'] }}</p>
     <p>URL: {{ company_data['weburl'] }}</p>
-<<<<<<< Updated upstream
 
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
     <script type="text/javascript">
@@ -112,36 +111,15 @@
 </script>
 <div>
   <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Red dot" />
+  <p>This chart illustrates the Linear Regression analysis of {{ company_data['name'] }}'s profits over the past year. It provides an overview of the anticipated stock price,
+  <br>considering historical price movements at regular intervals. The slope of the regression line indicates the strength of the observed trend,
+  <br>offering insight into the general trajectory of stock prices over time.</p>
 </div>
 <div>
   <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="suprise earn " />
+  <p>This chart contrasts the actual performance of the stock with the predictions made by {{ company_data['name'] }}. These projections typically rely on financial metrics such as
+  <br>earnings per share, offering valuable insights into predicting the company's financial health and potential future movements in the stock market.</p>
 </div>
-
-=======
-    <!--COMPANY DATA-->
-    <div id="result">The result will be shown here</div>
-    <py-script>
-        from js import document
-        x = 12
-        y = 12
-        z = x + y
-        document.getElementById("result").innerText = f"The value of z is: {z}"
-    </py-script>
-
-    <div>
-      <p>Taken from wikpedia</p>
-      <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Red dot" />
-        <p>This chart illustrates the Linear Regression analysis of {{ company_data['name'] }}'s profits over the past year. It provides an overview of the anticipated stock price,
-            <br>considering historical price movements at regular intervals. The slope of the regression line indicates the strength of the observed trend,
-            <br>offering insight into the general trajectory of stock prices over time.</p>
-    </div>
-    <div>
-      <p>Taken from wikpedia</p>
-      <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="suprise earn " />
-       <p>This chart contrasts the actual performance of the stock with the predictions made by {{ company_data['name'] }}. These projections typically rely on financial metrics such as
-           <br>earnings per share, offering valuable insights into predicting the company's financial health and potential future movements in the stock market.</p>
-    </div>
->>>>>>> Stashed changes
 
 </body>
 
