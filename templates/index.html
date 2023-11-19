@@ -9,11 +9,13 @@
             background: #121212; /* Dark background for dark mode */
             color: #ffffff; /* White text for dark mode */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center elements horizontally */
+            justify-content: flex-start; /* Align elements to the start (top) of the container */
             height: 100vh;
-            margin: 0;
+            margin: 10px;
         }
+
         form {
             background: #1e1e1e; /* Slightly lighter shade for the form background */
             padding: 20px;
@@ -49,9 +51,11 @@
             color: #bbb; /* Light grey text for labels */
             font-size: 14px;
         }
+
     </style>
 </head>
 <body>
+    <h1>start learning stock market analysis👇</h1>
     <form action="/company-data" method="post">
         <label for="stock_name">Stock Name:</label>
         <input type="text" class="form-control" id="stock_name" placeholder="Enter stock ticker, e.g., TSLA" name="stock_name">
