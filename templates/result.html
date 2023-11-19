@@ -184,89 +184,89 @@
         <p>Web URL: <a href="{{ company_data['weburl'] }}" target="_blank">{{ company_data['weburl'] }}</a></p>
         <!-- TradingView Widget END -->
     </div>
+
+    <!-- BAR CHART -->
     <div class="chart-container">
-     <h2>this is title</h2>
-     <p>this is paragraph</p>
-    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-    <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
-    <script type="text/javascript">
-        /* Global chart styling with Chart.js options */
+        <h2>this is title</h2>
+        <p>this is paragraph</p>
 
-        var xValues = {{ x_values|tojson }};
-        var y1Values = {{ y1_values|tojson }};
-        var y2Values = {{ y2_values|tojson }};
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        <script type="text/javascript">
+            /* Global chart styling with Chart.js options */
 
-        new Chart("myChart", {
-        type: "bar",
-        data: {
-            labels: xValues,
-            datasets: [
+            var xValues = {{ x_values|tojson }};
+            var y1Values = {{ y1_values|tojson }};
+            var y2Values = {{ y2_values|tojson }};
+
+            new Chart("myChart",
             {
-                label: "Actual",
-                backgroundColor: '#42f02b',
-                data: y1Values
-            },
-            {
-                label: "Estimate",
-                backgroundColor: '#007bff',
-                data: y2Values
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {display: false},
-            aspectRatio: 3,
-            title: {
-            display: true,
-            text: "World Wine Production 2018"
-            }
-        }
-        });
-
-     // Sample data for the scatter plot
-    //  var points2 = [
-    //         {x:50, y:7},
-    //         {x:60, y:8},
-    //         {x:70, y:8},
-    //         {x:80, y:9},
-    //         {x:90, y:9},
-    //         {x:100, y:9},
-    //         {x:110, y:10},
-    //         {x:120, y:11},
-    //         {x:130, y:14},
-    //         {x:140, y:14},
-    //         {x:150, y:15}
-    //     ];
-
-        var points2 = {{ points|tojson }}
-
-        new Chart("myChart2", {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'Scatter Plot',
-                    data: points2,
-                    backgroundColor: 'rgba(255, 0, 0, 0.8)', // Dot color
-                    borderColor: 'rgba(255, 255, 255, 1)', // Border color
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        type: 'linear',
-                        position: 'bottom'
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [
+                    {
+                        label: "Actual",
+                        backgroundColor: '#42f02b',
+                        data: y1Values
                     },
-                    y: {
-                        type: 'linear',
-                        position: 'left'
+                    {
+                        label: "Estimate",
+                        backgroundColor: '#007bff',
+                        data: y2Values
+                    }]
+                },
+                options:
+                {
+                    responsive: true,
+                    legend: {display: false},
+                    aspectRatio: 3,
+                    title:
+                    {
+                        display: true,
+                        text: "World Wine Production 2018"
                     }
                 }
-            }
-        });
+            });
+        </script>
+    </div>
 
-</script>
-<div>
+    <!-- SCATTER PLOT -->
+    <div class="chart-container">
+        <canvas id="myChart2"></canvas>
+        <script type="text/javascript">
+            var points2 = {{ points|tojson }}
+
+            new Chart("myChart2", {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                    {
+                        label: 'Scatter Plot',
+                        data: points2,
+                        backgroundColor: 'rgba(255, 0, 0, 0.8)', // Dot color
+                        borderColor: 'rgba(255, 255, 255, 1)', // Border color
+                        borderWidth: 1
+                    }]
+                },
+                options:
+                {
+                    scales: {
+                        x:
+                        {
+                            type: 'linear',
+                            position: 'bottom'
+                        },
+                        y:
+                        {
+                            type: 'linear',
+                            position: 'left'
+                        }
+                    }
+                }
+            });
+        </script>
+        </div>
+<!-- <div>
   <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Red dot" />
   <p>This chart illustrates the Linear Regression analysis of {{ company_data['name'] }}'s profits over the past year. It provides an overview of the anticipated stock price,
   <br>considering historical price movements at regular intervals. The slope of the regression line indicates the strength of the observed trend,
@@ -276,10 +276,7 @@
   <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="suprise earn " />
   <p>This chart contrasts the actual performance of the stock with the predictions made by {{ company_data['name'] }}. These projections typically rely on financial metrics such as
   <br>earnings per share, offering valuable insights into predicting the company's financial health and potential future movements in the stock market.</p>
-</div>
-
-    </script>
-    </div>
+</div> -->
     <div class="chart-container">
         <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Linear Regression Graph" />
         <div class="text-container">
