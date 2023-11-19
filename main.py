@@ -2,7 +2,6 @@ import base64
 from flask import Flask, render_template, request
 import finnhub
 from datetime import datetime, timedelta
-from datetime import datetime, timedelta
 import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
@@ -42,7 +41,7 @@ def prices(tick):
     print(type(stock_prices))
     return stock_prices
 
-def graph_linear_reg():
+def graph_linear_reg(tick):
     # Current datetime
     current_datetime = datetime.now()
 
@@ -55,7 +54,7 @@ def graph_linear_reg():
 
     finnhub_client = finnhub.Client(api_key="ckuqblpr01qmtr8lgnu0ckuqblpr01qmtr8lgnug")
 
-    data = finnhub_client.stock_candles('AAPL', 'D', one_year_ago_timestamp, current_timestamp)
+    data = finnhub_client.stock_candles(tick, 'D', one_year_ago_timestamp, current_timestamp)
 
     stock_prices = data['c']
 
@@ -91,7 +90,48 @@ def graph_linear_reg():
     my_stringIObytes.seek(0)
     my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode()
     print(my_base64_jpgData)
+
     return my_base64_jpgData
+
+def graph_suprise_earn(tick):
+    data = (finnhub_client.company_earnings(tick, limit=5))
+
+    # Create empty lists to store the 'period', 'actual', and 'estimate' values
+    period_values = []
+    actual_earn = []
+    estimate_earn = []
+
+    # Iterate through each dictionary in the list and extract the values
+    for record in data:
+        period_values.append(record['period'])
+        actual_earn.append(record['actual'])
+        estimate_earn.append(record['estimate'])
+
+    # Setting up the bar chart
+    X_axis = np.arange(len(period_values))
+
+    # Create the figure before plotting
+    fig = plt.figure(figsize=(10, 5))
+
+    # Plot the bars
+    plt.bar(X_axis - 0.2, actual_earn, 0.4, label='Actual')
+    plt.bar(X_axis + 0.2, estimate_earn, 0.4, label='Estimate')
+
+    # Set the x-axis labels and title, and show legend
+    plt.xticks(X_axis, period_values)
+    plt.xlabel('Period')
+    plt.ylabel('Earnings')
+    plt.title(f'{tick} Earnings: Actual vs Estimate')
+    plt.legend()
+
+    my_stringIObytes = io.BytesIO()
+    plt.savefig(my_stringIObytes, format='jpg')
+    my_stringIObytes.seek(0)
+    my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode()
+    print(my_base64_jpgData)
+
+    return my_base64_jpgData
+
 
 @app.route('/')
 def home():
@@ -102,15 +142,15 @@ def receive_data():
     stock_name = request.form['stock_name']
     stock_prices = prices(stock_name)
     company_data = company_datas(stock_name)
-    linear_reg_graph = graph_linear_reg()
-    print(stock_prices)
-    print(graph_linear_reg())
+    linear_reg_graph = graph_linear_reg(stock_name)
+    suprise_earn_img = graph_suprise_earn(stock_name)
     return render_template(
         "result.html",
         company_data=company_data,
         stock_name=stock_name,
         stock_prices=stock_prices,
-        linear_reg_graph=linear_reg_graph
+        linear_reg_graph=linear_reg_graph,
+        suprise_earn_img=suprise_earn_img
     )
 
 if __name__ == '__main__':
