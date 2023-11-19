@@ -187,8 +187,11 @@
 
     <!-- BAR CHART -->
     <div class="chart-container">
-        <h2>this is title</h2>
-        <p>this is paragraph</p>
+        <div class="text-container">
+            <h2>this is title</h2>
+            <p>this is paragraph</p>
+            <p>{{ trendline }}</p>
+        </div>
 
         <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
         <script type="text/javascript">
@@ -235,17 +238,27 @@
         <canvas id="myChart2"></canvas>
         <script type="text/javascript">
             var points2 = {{ points|tojson }}
+            var trendline_data = {{ trendline_p|tojson }}
 
             new Chart("myChart2", {
                 type: 'scatter',
                 data: {
                     datasets: [
                     {
-                        label: 'Scatter Plot',
+                        label: 'Actual Stock Price',
                         data: points2,
-                        backgroundColor: 'rgba(255, 0, 0, 0.8)', // Dot color
+                        backgroundColor: 'rgba(255, 0, 255, 0.8)', // Dot color
                         borderColor: 'rgba(255, 255, 255, 1)', // Border color
                         borderWidth: 1
+                    },
+                    {
+                        label: 'Predicted Price',
+                        data: trendline_data,
+                        type: 'line',
+                        backgroundColor: 'rgba(255, 0, 0, 0.8)',
+                        borderColor: 'rgba(255, 0, 0, 1)',
+                        borderWidth: 2,
+                        fill: false
                     }]
                 },
                 options:

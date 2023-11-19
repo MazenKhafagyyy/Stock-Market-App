@@ -208,7 +208,23 @@ def get_scatter_points(stock_name):
 
     list_of_dicts = [{ 'x': day, 'y': price } for day, price in zip(days, stock_prices)]
 
-    return list_of_dicts
+    X = np.array(days).reshape(-1, 1)
+    y = np.array(stock_prices)
+
+    # Create and fit the linear regression model
+    model = LinearRegression()
+    model.fit(X, y)
+
+    # Coefficients
+    slope = model.coef_[0]
+    intercept = model.intercept_
+
+    # Prepare data for plotting
+    predicted_prices = model.predict(X)
+
+    trendline_points = [{ 'x': day, 'y': price } for day, price in zip(days, predicted_prices)]
+
+    return list_of_dicts, trendline_points
 
 
 @app.route('/')
@@ -223,7 +239,7 @@ def receive_data():
     linear_reg_graph = graph_linear_reg(stock_name)
     suprise_earn_img = graph_suprise_earn(stock_name)
     x_values, y1_values, y2_values = get_xy_values(stock_name)
-    points = get_scatter_points(stock_name)
+    points, trendline_p = get_scatter_points(stock_name)
     return render_template(
         "result.html",
         company_data=company_data,
@@ -234,7 +250,8 @@ def receive_data():
         x_values = x_values,
         y1_values = y1_values,
         y2_values = y2_values,
-        points = points
+        points = points,
+        trendline_p = trendline_p
     )
 
 if __name__ == '__main__':
