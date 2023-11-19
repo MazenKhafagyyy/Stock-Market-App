@@ -4,4 +4,4 @@
 
   The backend utilizes Python Flask, complemented by a front-end incorporating HTML, CSS, JavaScript, and Chart.JS. API integration is facilitated through Finnhub, while TradingView widgets enhance the user interface. Key emphases encompass Company Profile data, Earnings Surprise, and Financial as reported within the last year or two.
 
-     This website empowers users to assess the strength of a company's stock market performance before making investment decisions.
+  This website empowers users to assess the strength of a company's stock market performance before making investment decisions.
