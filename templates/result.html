@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.11.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2023.11.1/core.js"></script>
 </head>
 <body>
     <h1>this is result</h1>
     <p>Stock Name: {{ stock_name }}</p>
+    <P>Stock prices: {{ stock_prices }}</P>
+    <p>Company data: {{ company_data }}</p>
+    <div id="result">The result will be shown here</div>
+    <py-script>
+        from js import document
+        x = 12
+        y = 12
+        z = x + y
+        document.getElementById("result").innerText = f"The value of z is: {z}"
+    </py-script>
 </body>
+
 </html>

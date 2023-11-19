@@ -48,5 +48,6 @@ plt.xlabel('Days')
 plt.ylabel('Stock Price')
 plt.legend()
 plt.show()
+print(type(stock_prices))
 
 
