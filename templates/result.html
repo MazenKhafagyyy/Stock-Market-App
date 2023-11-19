@@ -11,7 +11,19 @@
     <h1>this is result</h1>
     <p>Stock Name: {{ stock_name }}</p>
     <P>Stock prices: {{ stock_prices }}</P>
-    <p>Company data: {{ company_data }}</p>
+    <!--COMPANY DATA-->
+    <img src= {{ company_data['logo'] }} alt="Company Logo">
+    <p>Country: {{ company_data['country'] }}</p>
+    <p>Currency: {{ company_data['currency'] }}</p>
+    <p>Exchange: {{ company_data['exchange'] }}</p>
+    <p>IPO: {{ company_data['ipo'] }}</p>
+    <p>Market Capitalization: {{ company_data['marketCapitalization'] }}</p>
+    <p>Name: {{ company_data['name'] }}</p>
+    <p>Phone: {{ company_data['phone'] }}</p>
+    <p>Share Outstanding: {{ company_data['shareOutstanding'] }}</p>
+    <p>Ticker: {{ company_data['ticker'] }}</p>
+    <p>URL: {{ company_data['weburl'] }}</p>
+    <!--COMPANY DATA-->
     <div id="result">The result will be shown here</div>
     <py-script>
         from js import document
