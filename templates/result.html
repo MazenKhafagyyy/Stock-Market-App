@@ -58,14 +58,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://pyscript.net/releases/2023.11.1/core.css" />
     <script type="module" src="https://pyscript.net/releases/2023.11.1/core.js"></script>
-    <py-env>
-        - matplotlib
-    </py-env>
 </head>
 <body>
-    <h1>this is result</h1>
     <p>Stock Name: {{ stock_name }}</p>
-    <P>Stock prices: {{ stock_prices }}</P>
     <!--COMPANY DATA-->
     <img src= "{{ company_data['logo'] }}" alt="Company Logo">
     <p>Country: {{ company_data['country'] }}</p>
@@ -78,19 +73,6 @@
     <p>Share Outstanding: {{ company_data['shareOutstanding'] }}</p>
     <p>Ticker: {{ company_data['ticker'] }}</p>
     <p>URL: {{ company_data['weburl'] }}</p>
-    <!--COMPANY DATA-->
-    <div id="result">The result will be shown here</div>
-    <py-script>
-        from js import document
-        x = 12
-        y = 12
-        z = x + y
-        document.getElementById("result").innerText = f"The value of z is: {z}"
-    </py-script>
-
-    <p>{{ x_values }}</p>
-    <p>{{ y1_values }}</p>
-    <p>{{ y2_values }}</p>
 
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
     <script type="text/javascript">
@@ -108,10 +90,13 @@
             labels: xValues,
             datasets: [
             {
+                label: "Actual",
                 backgroundColor: 'rgba(235, 0, 235, 0.5)',
                 data: y1Values
             },
             {
+                label: "Estimate",
+                backgroundColor: 'rgba(235, 235, 0.5)',
                 data: y2Values
             }]
         },
@@ -124,17 +109,15 @@
         }
         });
 </script>
-    </script>
+<div>
+  <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Red dot" />
+</div>
+<div>
+  <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="suprise earn " />
+</div>
+
 
 </body>
 
 </html>
 
-<div>
-  <p>Taken from wikpedia</p>
-  <img src="data:image/png;base64, {{ linear_reg_graph }}" alt="Red dot" />
-</div>
-<div>
-  <p>Taken from wikpedia</p>
-  <img src="data:image/png;base64, {{ suprise_earn_img }}" alt="suprise earn " />
-</div>
